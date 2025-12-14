@@ -651,5 +651,27 @@ window.addEventListener('load', () => {
 });
 
 </script>
+  <!-- Firebase SDKs (χωρίς import, τρέχει απευθείας στον browser) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+<script>
+  // === Firebase configuration ===
+  const firebaseConfig = {
+    apiKey: "AIzaSyA3J74FlN_DI7sZclq09l1Y62eenS0zP0yQ",
+    authDomain: "euphoria-2026.firebaseapp.com",
+    projectId: "euphoria-2026",
+    storageBucket: "euphoria-2026.appspot.com",
+    messagingSenderId: "259023927428",
+    appId: "1:259023927428:web:74099e69bea7b07a7b2ad1"
+  };
+
+  // === Initialize Firebase ===
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  firebase.auth().signInAnonymously();
+</script>
+
 </body>
 </html>
