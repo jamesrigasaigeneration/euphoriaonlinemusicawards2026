@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EUPHORIA – Multi‑User Neon Board (Hi‑Tech Buttons)</title>
+  <title>EUPHORIA – Multi-User Neon Board (Cloud Sync)</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Orbitron:wght@700&display=swap');
 
@@ -76,99 +76,72 @@
     .login-grid{ display:grid; grid-template-columns: repeat(3,minmax(0,280px)); gap:18px; }
     @media (max-width:980px){ .login-grid{ grid-template-columns:1fr; } }
 
-    
-/* --- Modern User Buttons v2 (bigger, glassy, neon, flowing light) --- */
-.login-btn{
-  --btn-grad: linear-gradient(135deg, #8b78ff, #ff7ae1, #00eaff);
-  --btn-bg: rgba(30,36,90,0.42);
-  position:relative;
-  padding: 26px 34px;
-  border-radius: 22px;
-  border: 1px solid #a8bfff66;
-  background: var(--btn-bg);
-  color:#fff;
-  font-weight: 800;
-  font-size: 1.12rem;
-  letter-spacing:.08em;
-  text-transform: uppercase;
-  box-shadow:
-    0 10px 30px -18px rgba(0,0,0,.7),
-    0 0 30px -12px #ff7ae166,
-    0 0 36px -16px #6ab8ff66,
-    inset 0 0 6px rgba(255,255,255,0.2);
-  cursor:pointer;
-  overflow:hidden; isolation:isolate;
-  transition:
-    transform .25s ease,
-    box-shadow .3s ease,
-    border-color .3s ease,
-    background .3s ease;
-  backdrop-filter: blur(10px) saturate(130%);
-  opacity:0; transform: translateY(12px) scale(.97);
-  animation: popIn .7s cubic-bezier(.2,.7,.2,1) forwards;
-  animation-delay: var(--d,0s);
-}
-
-.login-btn:hover{
-  transform: translateY(-4px) scale(1.03);
-  border-color:#ffffffaa;
-  box-shadow:
-    0 16px 40px -18px rgba(0,0,0,.7),
-    0 0 36px #ff7ae1aa,
-    0 0 46px #45caff99,
-    inset 0 0 10px rgba(255,255,255,0.28);
-}
-
-.login-btn:active{
-  transform: translateY(0) scale(.98);
-  box-shadow:
-    0 10px 24px -18px rgba(0,0,0,.7),
-    0 0 22px #ff7ae188,
-    0 0 28px #45caff77,
-    inset 0 0 8px rgba(255,255,255,0.25);
-}
-
-/* Outer neon glow */
-.login-btn::before{
-  content:"";
-  position:absolute; inset:-1px; border-radius:inherit;
-  background: var(--btn-grad);
-  filter: blur(12px);
-  opacity:.55;
-  transition: opacity .25s ease;
-  z-index:-1;
-}
-
-/* Flowing light sweep */
-.login-btn::after{
-  content:"";
-  position:absolute; inset:0; border-radius:inherit;
-  background: linear-gradient(120deg, transparent 0 45%, rgba(255,255,255,.45) 50%, transparent 55%);
-  transform: translateX(-160%) skewX(-20deg);
-  animation: btnShine 3.8s ease-in-out infinite;
-  mix-blend-mode: screen; pointer-events:none;
-}
-
-.login-btn:hover::before{ opacity:.9; }
-.login-btn:hover::after{ animation-duration: 2.4s; }
-
-@keyframes btnShine{
-  0% { transform: translateX(-160%) skewX(-20deg); }
-  60% { transform: translateX(160%) skewX(-20deg); }
-  100% { transform: translateX(160%) skewX(-20deg); }
-}
-
-
-    /* button ripple */
-    .ripple{
-      position:absolute; width:12px; height:12px; border-radius:50%;
-      background: radial-gradient(circle, rgba(255,255,255,.8) 0%, rgba(255,255,255,.0) 60%);
-      transform: translate(-50%,-50%); animation: ripple 700ms ease-out forwards; pointer-events:none;
-      filter: blur(1px);
+    /* --- Modern User Buttons v2 (bigger, glassy, neon, flowing light) --- */
+    .login-btn{
+      --btn-grad: linear-gradient(135deg, #8b78ff, #ff7ae1, #00eaff);
+      --btn-bg: rgba(30,36,90,0.42);
+      position:relative;
+      padding: 26px 34px;
+      border-radius: 22px;
+      border: 1px solid #a8bfff66;
+      background: var(--btn-bg);
+      color:#fff;
+      font-weight: 800;
+      font-size: 1.12rem;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      box-shadow:
+        0 10px 30px -18px rgba(0,0,0,.7),
+        0 0 30px -12px #ff7ae166,
+        0 0 36px -16px #6ab8ff66,
+        inset 0 0 6px rgba(255,255,255,0.2);
+      cursor:pointer;
+      overflow:hidden; isolation:isolate;
+      transition:
+        transform .25s ease,
+        box-shadow .3s ease,
+        border-color .3s ease,
+        background .3s ease;
+      backdrop-filter: blur(10px) saturate(130%);
+      opacity:0; transform: translateY(12px) scale(.97);
+      animation: popIn .7s cubic-bezier(.2,.7,.2,1) forwards;
+      animation-delay: var(--d,0s);
     }
-
-    /* Entrance sequencing */
-    .login-main{ grid-column:1 / -1; width:min(440px, 92vw); justify-self:center; }
+    .login-btn:hover{
+      transform: translateY(-4px) scale(1.03);
+      border-color:#ffffffaa;
+      box-shadow:
+        0 16px 40px -18px rgba(0,0,0,.7),
+        0 0 36px #ff7ae1aa,
+        0 0 46px #45caff99,
+        inset 0 0 10px rgba(255,255,255,0.28);
+    }
+    .login-btn:active{
+      transform: translateY(0) scale(.98);
+      box-shadow:
+        0 10px 24px -18px rgba(0,0,0,.7),
+        0 0 22px #ff7ae188,
+        0 0 28px #45caff77,
+        inset 0 0 8px rgba(255,255,255,0.25);
+    }
+    .login-btn::before{
+      content:""; position:absolute; inset:-1px; border-radius:inherit;
+      background: var(--btn-grad); filter: blur(12px); opacity:.55; transition: opacity .25s ease; z-index:-1;
+    }
+    .login-btn::after{
+      content:""; position:absolute; inset:0; border-radius:inherit;
+      background: linear-gradient(120deg, transparent 0 45%, rgba(255,255,255,.45) 50%, transparent 55%);
+      transform: translateX(-160%) skewX(-20deg);
+      animation: btnShine 3.8s ease-in-out infinite;
+      mix-blend-mode: screen; pointer-events:none;
+    }
+    .login-btn:hover::before{ opacity:.9; }
+    .login-btn:hover::after{ animation-duration: 2.4s; }
+    @keyframes btnShine{
+      0% { transform: translateX(-160%) skewX(-20deg); }
+      60% { transform: translateX(160%) skewX(-20deg); }
+      100% { transform: translateX(160%) skewX(-20deg); }
+    }
 
     .hidden{ display:none !important; }
 
@@ -180,121 +153,60 @@
     tbody tr + tr td{ border-top:1px solid #9bbcff2b; }
     .stat-card{ background: linear-gradient(165deg,#2a347dcc,#232b69cc); border:1px solid #9bbcff2d; border-radius:16px; padding:14px 16px; margin:10px 0; }
 
+    /* --- Admin details accordion --- */
+    .details-panel{ border:1px solid var(--outline); border-radius:14px; margin:10px 0; background: linear-gradient(165deg,#2a347dcc,#232b69cc); }
+    .details-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; cursor:pointer; user-select:none; }
+    .details-head h5{ margin:0; font-size:14px; letter-spacing:.06em; text-transform:uppercase; }
+    .details-toggle{ width:22px; height:22px; display:grid; place-items:center; border-radius:6px; border:1px solid #9bbcff55; font-weight:800; }
+    .details-body{ display:none; padding:12px 14px 16px; border-top:1px solid #9bbcff2d; }
+    .details-body.open{ display:block; }
+    .detail-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    @media (max-width:900px){ .detail-grid{ grid-template-columns:1fr; } }
+    .detail-col{ background:#24307baa; border:1px dashed var(--dashed); border-radius:12px; padding:10px 12px; }
+    .detail-col h6{ margin:0 0 8px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#d9e2ff; }
+    .detail-col ol{ margin:0; padding-left:1.2em; }
+    .detail-col li{ margin:4px 0 6px; color:#f1f4ff; line-height:1.45; word-break:break-word; }
+    .detail-empty{ color:#aebdf3; font-style:italic; }
+
     /* Animations */
     @keyframes headerPulse{ 0%,100%{ filter: drop-shadow(0 0 8px var(--glow-pink)) drop-shadow(0 0 10px var(--glow-blue)); } 50%{ filter: drop-shadow(0 0 12px var(--glow-pink)) drop-shadow(0 0 14px var(--glow-blue)); } }
     @keyframes buildIn{ to{ opacity:1; transform: translateY(0) scale(1);} }
     @keyframes popIn{ to{ opacity:1; transform: translateY(0) scale(1);} }
-    @keyframes ripple{ from{ width:0; height:0; opacity:.6; } to{ width:260px; height:260px; opacity:0; } }
-  
-/* --- Enhanced Neon Intro --- */
-#intro {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, #1a1330 0%, #0d081a 90%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  overflow: hidden;
-  animation: fadeOut 1.2s ease forwards;
-  animation-delay: 6s;
-}
 
-.intro-text {
-  font-family: 'Orbitron', sans-serif;
-  font-size: clamp(44px, 7vw, 100px);
-  letter-spacing: 0.18em;
-  color: #ffffff;
-  position: relative;
-  text-shadow:
-    0 0 12px #ff00e6,
-    0 0 24px #ff00e6,
-    0 0 36px #00caff,
-    0 0 52px #00caff;
-  white-space: nowrap;
-}
-
-/* Per-letter build */
-.intro-text .char {
-  opacity: 0;
-  display: inline-block;
-  filter: blur(8px);
-  transform: translateY(10px) scale(0.98);
-  animation: charOn 0.6s ease forwards;
-  animation-delay: calc(var(--i) * 0.08s);
-}
-
-@keyframes charOn {
-  0% { opacity: 0; filter: blur(8px); transform: translateY(12px) scale(0.98); }
-  60% { opacity: 1; filter: blur(2px); transform: translateY(0) scale(1); }
-  100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
-}
-
-/* Flicker pulse and shine sweep */
-
-
-/* Shine sweep */
-
-  60% { left: 120%; }
-  100% { left: 120%; }
-}
-
-/* Pulse glow (starts after all letters appear) */
-@keyframes pulseGlow {
-  0% { text-shadow: 0 0 10px #ff00e6, 0 0 20px #ff00e6, 0 0 30px #00caff; }
-  50% { text-shadow: 0 0 20px #ff00e6, 0 0 40px #00caff, 0 0 60px #00caff; }
-  100% { text-shadow: 0 0 12px #ff00e6, 0 0 24px #00caff, 0 0 48px #00caff; }
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
-
-
-/* --- Admin details accordion --- */
-.details-panel{
-  border:1px solid var(--outline);
-  border-radius:14px;
-  margin:10px 0;
-  background: linear-gradient(165deg,#2a347dcc,#232b69cc);
-}
-.details-head{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:10px; padding:12px 14px; cursor:pointer;
-  user-select:none;
-}
-.details-head h5{
-  margin:0; font-size:14px; letter-spacing:.06em; text-transform:uppercase;
-}
-.details-toggle{
-  width:22px; height:22px; display:grid; place-items:center;
-  border-radius:6px; border:1px solid #9bbcff55; font-weight:800;
-}
-.details-body{
-  display:none; padding:12px 14px 16px; border-top:1px solid #9bbcff2d;
-}
-.details-body.open{ display:block; }
-.detail-grid{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
-}
-@media (max-width:900px){ .detail-grid{ grid-template-columns:1fr; } }
-.detail-col{
-  background:#24307baa; border:1px dashed var(--dashed);
-  border-radius:12px; padding:10px 12px;
-}
-.detail-col h6{
-  margin:0 0 8px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#d9e2ff;
-}
-.detail-col ol{ margin:0; padding-left:1.2em; }
-.detail-col li{ margin:4px 0 6px; color:#f1f4ff; line-height:1.45; word-break:break-word; }
-.detail-empty{ color:#aebdf3; font-style:italic; }
-
-</style>
+    /* --- Intro screen (enhanced, no shine) --- */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, #1a1330 0%, #0d081a 90%);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; overflow: hidden;
+      animation: fadeOut 1.2s ease forwards; animation-delay: 6s;
+    }
+    .intro-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(44px, 7vw, 100px);
+      letter-spacing: 0.18em; color: #fff; position: relative;
+      text-shadow: 0 0 12px #ff00e6, 0 0 24px #ff00e6, 0 0 36px #00caff, 0 0 52px #00caff;
+      white-space: nowrap;
+    }
+    .intro-text .char {
+      opacity: 0; display: inline-block; filter: blur(8px); transform: translateY(10px) scale(0.98);
+      animation: charOn 0.6s ease forwards; animation-delay: calc(var(--i) * 0.08s);
+    }
+    @keyframes charOn {
+      0% { opacity: 0; filter: blur(8px); transform: translateY(12px) scale(0.98); }
+      60% { opacity: 1; filter: blur(2px); transform: translateY(0) scale(1); }
+      100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+    }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+  </style>
 </head>
 <body>
+  <!-- Intro -->
   <div id="intro">
     <h1 class="intro-text">EUPHORIA</h1>
   </div>
+
   <div class="wrapper">
     <div class="brand">
       <h1>EUPHORIA</h1>
@@ -344,15 +256,31 @@
           <tbody></tbody>
         </table>
       </div>
-    
-    <div class="stat-card" id="adminDetails" style="margin-top:14px;">
-      <h4 style="margin:8px 0 12px; text-align:center; letter-spacing:.08em; text-transform:uppercase; color:#e8eeff;">Αναλυτική Προβολή Καταχωρήσεων</h4>
-      <div id="detailsAccordion"></div>
-    </div>
+
+      <!-- Αναλυτική Προβολή -->
+      <div class="stat-card" id="adminDetails" style="margin-top:14px;">
+        <h4 style="margin:8px 0 12px; text-align:center; letter-spacing:.08em; text-transform:uppercase; color:#e8eeff;">Αναλυτική Προβολή Καταχωρήσεων</h4>
+        <div id="detailsAccordion"></div>
+      </div>
     </section>
   </div>
 
   <script>
+    /* Build intro letters & subtle pulse */
+    (function(){
+      const el = document.querySelector('#intro .intro-text');
+      if (!el) return;
+      const text = el.textContent.trim();
+      el.textContent = '';
+      for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.style.setProperty('--i', i);
+        span.textContent = text[i];
+        el.appendChild(span);
+      }
+    })();
+
     const USERS = {
       james: {label:'James Rigas', pass:'0825', admin:true, prefix:'u_james'},
       teri: {label:'Teri Vi Sentio', pass:'1478', admin:false, prefix:'u_teri'},
@@ -360,16 +288,9 @@
       lijiansi: {label:'Lijiansi', pass:'2365', admin:false, prefix:'u_lijiansi'},
     };
     const TITLES = [
-      'BEST GREEK SONG',
-      'BEST FOREIGN SONG',
-      'BEST GREEK MALE ARTIST',
-      'BEST FOREIGN MALE ARTIST',
-      'BEST GREEK FEMALE ARTIST',
-      'BEST FOREIGN FEMALE ARTIST',
-      'BEST GREEK MUSIC VIDEO',
-      'BEST FOREIGN MUSIC VIDEO',
-      'BEST ESC 25 PERFORMANCE',
-      'ALBUM OF THE YEAR'
+      'BEST GREEK SONG','BEST FOREIGN SONG','BEST GREEK MALE ARTIST','BEST FOREIGN MALE ARTIST',
+      'BEST GREEK FEMALE ARTIST','BEST FOREIGN FEMALE ARTIST','BEST GREEK MUSIC VIDEO','BEST FOREIGN MUSIC VIDEO',
+      'BEST ESC 25 PERFORMANCE','ALBUM OF THE YEAR'
     ];
 
     const landing = document.getElementById('landing');
@@ -379,6 +300,39 @@
     const userLabel = document.getElementById('userLabel');
 
     function keyFor(prefix, catIdx){ return `${prefix}_capsule_${catIdx}`; }
+
+    /* ===== Firestore helpers (cloud sync) ===== */
+    function docRefFor(prefix, catIdx){
+      return db.collection('entries').doc(`${prefix}_${catIdx}`);
+    }
+    async function saveToCloud(prefix, catIdx, items){
+      try{
+        await docRefFor(prefix, catIdx).set({
+          prefix, catIdx, items,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge:true });
+      }catch(e){ console.warn('cloud save failed', e); }
+    }
+    function startRealtimeSync(prefix){
+      for(let i=0;i<TITLES.length;i++){
+        docRefFor(prefix, i).onSnapshot(snap=>{
+          const data = snap.data();
+          if(!data || !data.items) return;
+          const key = keyFor(prefix, i);
+          try{ localStorage.setItem(key, JSON.stringify(data.items)); }catch(_){}
+          const card = document.querySelector(`[data-key="${key}"]`);
+          if(card){
+            const rows = card.querySelectorAll('.editable');
+            data.items.forEach((v,idx)=>{
+              if(rows[idx] && document.activeElement !== rows[idx]){
+                rows[idx].textContent = v || '';
+              }
+            });
+          }
+        });
+      }
+    }
+
     function createCapsule(title, idx, prefix){
       const items = Array.from({length:10}, ()=> '<li><div class="editable" contenteditable data-placeholder="Γράψε εδώ..."></div></li>').join('');
       const card = document.createElement('article');
@@ -392,6 +346,15 @@
       const key = card.dataset.key;
       const items = [...card.querySelectorAll('.editable')].map(el=>el.innerHTML.trim());
       localStorage.setItem(key, JSON.stringify(items));
+      // cloud save
+      try{
+        const m = key.match(/^(.*)_capsule_(\d+)$/);
+        if(m){
+          const prefix = m[1];
+          const catIdx = parseInt(m[2],10);
+          saveToCloud(prefix, catIdx, items);
+        }
+      }catch(e){ console.warn('cannot save cloud', e); }
     }
     function loadCard(card){
       const key = card.dataset.key;
@@ -404,6 +367,8 @@
       }catch(e){ console.warn('cannot parse saved card', key); }
     }
     function renderApp(userKey){
+      // start realtime sync for this user
+      try{ startRealtimeSync(USERS[userKey].prefix); }catch(_){}
       app.classList.remove('hidden');
       admin.classList.add('hidden');
       grid.innerHTML = '';
@@ -433,157 +398,90 @@
       }
       return perCategory;
     }
-    
-// --- Helpers to get raw text safely (strip HTML) ---
-function cleanText(htmlStr){
-  if(!htmlStr) return '';
-  const tmp = document.createElement('div');
-  tmp.innerHTML = htmlStr;
-  // convert <br> to newline for readability
-  tmp.querySelectorAll('br').forEach(br => br.replaceWith('\n'));
-  const text = tmp.textContent || '';
-  return text.replace(/\u00A0/g, ' ').trim();
-}
 
-function getUserItems(prefix, catIdx){
-  const key = keyFor(prefix, catIdx);
-  let saved = localStorage.getItem(key);
-  const items = Array.from({length:10}, ()=>'');
-  if(saved){
-    try{
-      const arr = JSON.parse(saved);
-      for(let i=0;i<Math.min(arr.length,10);i++){
-        items[i] = cleanText(arr[i]);
-      }
-    }catch(e){ /* ignore */ }
-  }
-  return items;
-}
-
-function makeDetailColumn(title, items){
-  const col = document.createElement('div');
-  col.className = 'detail-col';
-  col.innerHTML = '<h6>'+title+'</h6>';
-  const hasAny = items.some(v => v && v.length);
-  if(!hasAny){
-    const p = document.createElement('p');
-    p.className = 'detail-empty';
-    p.textContent = 'Καμία καταχώριση.';
-    col.appendChild(p);
-    return col;
-  }
-  const ol = document.createElement('ol');
-  items.forEach(v => {
-    const li = document.createElement('li');
-    li.textContent = v && v.length ? v : '—';
-    ol.appendChild(li);
-  });
-  col.appendChild(ol);
-  return col;
-}
-
-function renderAdminDetails(){
-  const acc = document.getElementById('detailsAccordion');
-  if(!acc) return;
-  acc.innerHTML = '';
-  const uKeys = ['teri','monhia','lijiansi'];
-  TITLES.forEach((catTitle, idx) => {
-    const panel = document.createElement('div');
-    panel.className = 'details-panel';
-    const head = document.createElement('div');
-    head.className = 'details-head';
-    head.innerHTML = '<h5>'+catTitle+'</h5><div class="details-toggle">+</div>';
-    const body = document.createElement('div');
-    body.className = 'details-body';
-    const grid = document.createElement('div');
-    grid.className = 'detail-grid';
-
-    const teriItems = getUserItems(USERS['teri'].prefix, idx);
-    const monhiaItems = getUserItems(USERS['monhia'].prefix, idx);
-    const lijItems = getUserItems(USERS['lijiansi'].prefix, idx);
-
-    grid.appendChild(makeDetailColumn('Teri Vi Sentio', teriItems));
-    grid.appendChild(makeDetailColumn('Monhia', monhiaItems));
-    grid.appendChild(makeDetailColumn('Lijiansi', lijItems));
-
-    body.appendChild(grid);
-    panel.appendChild(head);
-    panel.appendChild(body);
-    acc.appendChild(panel);
-
-    head.addEventListener('click', ()=>{
-      const open = body.classList.toggle('open');
-      head.querySelector('.details-toggle').textContent = open ? '–' : '+';
-    });
-  });
-}
-
-
-// === Excel Export (HTML-based .xls) ===
-function buildExportHTML(){
-  // Summary table
-  const uKeys = ['teri','monhia','lijiansi'];
-  let summaryRows = '';
-  for(let i=0;i<TITLES.length;i++){
-    const counts = uKeys.map(k=> getUserData(USERS[k].prefix)[i]);
-    summaryRows += '<tr>'
-      + '<td>' + TITLES[i] + '</td>'
-      + '<td>' + counts[0] + '</td>'
-      + '<td>' + counts[1] + '</td>'
-      + '<td>' + counts[2] + '</td>'
-      + '<td>' + (counts[0]+counts[1]+counts[2]) + '</td>'
-      + '</tr>';
-  }
-  const summaryTable = '<table border="1">'
-    + '<thead><tr><th>Κατηγορία</th><th>Teri Vi Sentio</th><th>Monhia</th><th>Lijiansi</th><th>Σύνολο</th></tr></thead>'
-    + '<tbody>' + summaryRows + '</tbody></table>';
-
-  // Detailed table (one big table)
-  let detailHTML = '<table border="1">'
-    + '<thead><tr><th>Κατηγορία</th><th>Θέση</th><th>Teri Vi Sentio</th><th>Monhia</th><th>Lijiansi</th></tr></thead><tbody>';
-  for(let i=0;i<TITLES.length;i++){
-    const teri = getUserItems(USERS['teri'].prefix, i);
-    const monh = getUserItems(USERS['monhia'].prefix, i);
-    const lij = getUserItems(USERS['lijiansi'].prefix, i);
-    for(let pos=0; pos<10; pos++){
-      const cat = (pos===0) ? TITLES[i] : '';
-      detailHTML += '<tr>'
-        + '<td>' + cat + '</td>'
-        + '<td>' + (pos+1) + '</td>'
-        + '<td>' + (teri[pos] || '') + '</td>'
-        + '<td>' + (monh[pos] || '') + '</td>'
-        + '<td>' + (lij[pos] || '') + '</td>'
-        + '</tr>';
+    // Admin details UI
+    function cleanText(htmlStr){
+      if(!htmlStr) return '';
+      const tmp = document.createElement('div');
+      tmp.innerHTML = htmlStr;
+      tmp.querySelectorAll('br').forEach(br => br.replaceWith('\n'));
+      const text = tmp.textContent || '';
+      return text.replace(/\u00A0/g, ' ').trim();
     }
-  }
-  detailHTML += '</tbody></table>';
+    function getUserItems(prefix, catIdx){
+      const key = keyFor(prefix, catIdx);
+      let saved = localStorage.getItem(key);
+      const items = Array.from({length:10}, ()=> '');
+      if(saved){
+        try{
+          const arr = JSON.parse(saved);
+          for(let i=0;i<Math.min(arr.length,10);i++){
+            items[i] = cleanText(arr[i]);
+          }
+        }catch(e){}
+      }
+      return items;
+    }
+    function makeDetailColumn(title, items){
+      const col = document.createElement('div');
+      col.className = 'detail-col';
+      col.innerHTML = '<h6>'+title+'</h6>';
+      const hasAny = items.some(v => v && v.length);
+      if(!hasAny){
+        const p = document.createElement('p');
+        p.className = 'detail-empty';
+        p.textContent = 'Καμία καταχώριση.';
+        col.appendChild(p);
+        return col;
+      }
+      const ol = document.createElement('ol');
+      items.forEach(v => {
+        const li = document.createElement('li');
+        li.textContent = v && v.length ? v : '—';
+        ol.appendChild(li);
+      });
+      col.appendChild(ol);
+      return col;
+    }
+    function renderAdminDetails(){
+      const acc = document.getElementById('detailsAccordion');
+      if(!acc) return;
+      acc.innerHTML = '';
+      const uKeys = ['teri','monhia','lijiansi'];
+      TITLES.forEach((catTitle, idx) => {
+        const panel = document.createElement('div');
+        panel.className = 'details-panel';
+        const head = document.createElement('div');
+        head.className = 'details-head';
+        head.innerHTML = '<h5>'+catTitle+'</h5><div class="details-toggle">+</div>';
+        const body = document.createElement('div');
+        body.className = 'details-body';
+        const grid = document.createElement('div');
+        grid.className = 'detail-grid';
 
-  const html = '<html><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial, sans-serif}th,td{padding:6px 8px}th{background:#eef}td{vertical-align:top;}</style></head><body>'
-    + '<h2>Συγκεντρωτικά Στατιστικά</h2>' + summaryTable
-    + '<h2 style="margin-top:24px;">Αναλυτικές Καταχωρήσεις (1–10)</h2>' + detailHTML
-    + '</body></html>';
-  return html;
-}
+        const teriItems = getUserItems(USERS['teri'].prefix, idx);
+        const monhiaItems = getUserItems(USERS['monhia'].prefix, idx);
+        const lijItems = getUserItems(USERS['lijiansi'].prefix, idx);
 
-function exportToExcel(){
-  const content = buildExportHTML();
-  const blob = new Blob([content], {type: 'application/vnd.ms-excel'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  const dt = new Date();
-  const pad = (n)=> String(n).padStart(2,'0');
-  const fname = 'EUPHORIA_export_' + dt.getFullYear() + '-' + pad(dt.getMonth()+1) + '-' + pad(dt.getDate()) + '.xls';
-  a.href = url;
-  a.download = fname;
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(()=>{
-    URL.revokeObjectURL(url);
-    a.remove();
-  }, 0);
-}
+        grid.appendChild(makeDetailColumn('Teri Vi Sentio', teriItems));
+        grid.appendChild(makeDetailColumn('Monhia', monhiaItems));
+        grid.appendChild(makeDetailColumn('Lijiansi', lijItems));
 
-function renderAdmin(){
+        body.appendChild(grid);
+        panel.appendChild(head);
+        panel.appendChild(body);
+        acc.appendChild(panel);
+
+        head.addEventListener('click', ()=>{
+          const open = body.classList.toggle('open');
+          head.querySelector('.details-toggle').textContent = open ? '–' : '+';
+        });
+      });
+    }
+
+    function renderAdmin(){
+      // real-time sync όλων των χρηστών
+      try{ ['teri','monhia','lijiansi'].forEach(k=> startRealtimeSync(USERS[k].prefix)); }catch(_){}
       app.classList.add('hidden'); admin.classList.remove('hidden');
       const uKeys = ['teri','monhia','lijiansi'];
       const tBody = admin.querySelector('#statTable tbody'); tBody.innerHTML = '';
@@ -599,10 +497,11 @@ function renderAdmin(){
       const summary = admin.querySelector('#statSummary');
       summary.innerHTML = '<strong>Σύνολο συμπληρωμένων γραμμών:</strong> '+sum+' / '+(TITLES.length*10*3)+'<br><small>Teri Vi Sentio: '+totals.teri+' • Monhia: '+totals.monhia+' • Lijiansi: '+totals.lijiansi+'</small>';
       renderAdminDetails();
-      const btn = document.getElementById('exportExcel'); if(btn){ btn.onclick = exportToExcel; } 
-      renderAdminDetails();
+
+      const btn = document.getElementById('exportExcel'); if(btn){ btn.onclick = exportToExcel; }
       document.getElementById('backToLanding').onclick = ()=>{ admin.classList.add('hidden'); landing.classList.remove('hidden'); };
     }
+
     function askPasswordAndEnter(userKey, requiredPass){
       const input = prompt('Δώσε κωδικό πρόσβασης:');
       if(input === null) return;
@@ -611,7 +510,7 @@ function renderAdmin(){
     }
     landing.addEventListener('click', (e)=>{
       const btn = e.target.closest('.login-btn'); if(!btn) return;
-      // Ripple
+      // Ripple flash
       const r = document.createElement('span'); r.className='ripple';
       const rect = btn.getBoundingClientRect();
       r.style.left = (e.clientX - rect.left)+'px'; r.style.top = (e.clientY - rect.top)+'px';
@@ -619,46 +518,81 @@ function renderAdmin(){
       // Auth
       askPasswordAndEnter(btn.dataset.user, btn.dataset.pass);
     });
-  
 
+    // === Excel Export (HTML-based .xls) ===
+    function buildExportHTML(){
+      // Summary
+      const uKeys = ['teri','monhia','lijiansi'];
+      let summaryRows = '';
+      for(let i=0;i<TITLES.length;i++){
+        const counts = uKeys.map(k=> getUserData(USERS[k].prefix)[i]);
+        summaryRows += '<tr>'
+          + '<td>' + TITLES[i] + '</td>'
+          + '<td>' + counts[0] + '</td>'
+          + '<td>' + counts[1] + '</td>'
+          + '<td>' + counts[2] + '</td>'
+          + '<td>' + (counts[0]+counts[1]+counts[2]) + '</td>'
+          + '</tr>';
+      }
+      const summaryTable = '<table border="1">'
+        + '<thead><tr><th>Κατηγορία</th><th>Teri Vi Sentio</th><th>Monhia</th><th>Lijiansi</th><th>Σύνολο</th></tr></thead>'
+        + '<tbody>' + summaryRows + '</tbody></table>';
 
-// Split intro text into per-letter spans with staggered animation
-(function(){
-  const el = document.querySelector('#intro .intro-text');
-  if (!el) return;
-  const text = el.textContent.trim();
-  el.textContent = '';
-  for (let i = 0; i < text.length; i++) {
-    const span = document.createElement('span');
-    span.className = 'char';
-    span.style.setProperty('--i', i);
-    span.textContent = text[i];
-    el.appendChild(span);
-  }
-  // After letters finish (~ text.length * 80ms + 600ms), enable subtle pulse
-  const total = text.length * 80 + 600;
-  setTimeout(() => {
-    el.style.animation = 'pulseGlow 2s ease-in-out infinite alternate';
-  }, total);
-})();
+      // Details
+      let detailHTML = '<table border="1">'
+        + '<thead><tr><th>Κατηγορία</th><th>Θέση</th><th>Teri Vi Sentio</th><th>Monhia</th><th>Lijiansi</th></tr></thead><tbody>';
+      for(let i=0;i<TITLES.length;i++){
+        const teri = getUserItems(USERS['teri'].prefix, i);
+        const monh = getUserItems(USERS['monhia'].prefix, i);
+        const lij = getUserItems(USERS['lijiansi'].prefix, i);
+        for(let pos=0; pos<10; pos++){
+          const cat = (pos===0) ? TITLES[i] : '';
+          detailHTML += '<tr>'
+            + '<td>' + cat + '</td>'
+            + '<td>' + (pos+1) + '</td>'
+            + '<td>' + (teri[pos] || '') + '</td>'
+            + '<td>' + (monh[pos] || '') + '</td>'
+            + '<td>' + (lij[pos] || '') + '</td>'
+            + '</tr>';
+        }
+      }
+      detailHTML += '</tbody></table>';
 
-// Hide intro after 6 seconds
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const intro = document.getElementById('intro');
-    if (intro) intro.style.display = 'none';
-  }, 6500);
-});
+      const html = '<html><head><meta charset="UTF-8"><style>table{border-collapse:collapse;font-family:Arial,sans-serif}th,td{padding:6px 8px}th{background:#eef}td{vertical-align:top;}</style></head><body>'
+        + '<h2>Συγκεντρωτικά Στατιστικά</h2>' + summaryTable
+        + '<h2 style="margin-top:24px;">Αναλυτικές Καταχωρήσεις (1–10)</h2>' + detailHTML
+        + '</body></html>';
+      return html;
+    }
+    function exportToExcel(){
+      const content = buildExportHTML();
+      const blob = new Blob([content], {type: 'application/vnd.ms-excel'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const dt = new Date();
+      const pad = (n)=> String(n).padStart(2,'0');
+      const fname = 'EUPHORIA_export_' + dt.getFullYear() + '-' + pad(dt.getMonth()+1) + '-' + pad(dt.getDate()) + '.xls';
+      a.href = url; a.download = fname; document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 0);
+    }
 
-</script>
+    // Hide intro after ~6.5s
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const intro = document.getElementById('intro');
+        if (intro) intro.style.display = 'none';
+      }, 6500);
+    });
+  </script>
+
   <!-- Firebase SDKs (χωρίς import, τρέχει απευθείας στον browser) -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 
-<script>
-  // === Firebase configuration ===
-  const firebaseConfig = {
+  <script>
+    /* === Firebase configuration (από το project σου) === */
+const firebaseConfig = {
   apiKey: "AIzaSyA3j74FN_DIrsZclq09lIY62eenSOzP0yQ",
   authDomain: "euphoria-2026.firebaseapp.com",
   projectId: "euphoria-2026",
@@ -667,12 +601,10 @@ window.addEventListener('load', () => {
   appId: "1:259023927428:web:74099e69bea7b07a7b2ad1",
   measurementId: "G-JEVRCV89WB"
 };
-
-  // === Initialize Firebase ===
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  firebase.auth().signInAnonymously();
-</script>
-
+    /* === Initialize Firebase & anonymous auth === */
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    firebase.auth().signInAnonymously().catch(console.warn);
+  </script>
 </body>
 </html>
