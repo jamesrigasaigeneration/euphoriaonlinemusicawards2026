@@ -299,7 +299,7 @@
       // cleanup old
       while(activeUnsubs.length){ const u = activeUnsubs.pop(); try{ u(); }catch(_){} }
       for(let i=0;i<TITLES.length;i++){
-        const unsub = docRefFor(prefix, i).onSnapshot(snap=>{
+        const unsub = docRefFor(prefix, i).onSnapshot((snap)=>{
           const data = snap.data();
           if(!data || !data.items) return;
           const key = keyFor(prefix, i);
@@ -312,6 +312,11 @@
                 rows[idx].textContent = (v || '');
               }
             });
+          }
+        }, (error)=>{
+          console.error('Realtime sync error for', prefix, i, error);
+          if (error && error.code === 'permission-denied') {
+            alert('Άρνηση πρόσβασης στο Firestore (permission-denied). Ελέγξτε τους κανόνες ασφαλείας.');
           }
         });
         activeUnsubs.push(unsub);
@@ -510,7 +515,7 @@
       r.style.left = (e.clientX - rect.left)+'px'; r.style.top = (e.clientY - rect.top)+'px';
       btn.appendChild(r); setTimeout(()=>r.remove(), 700);
       // Auth
-      askPasswordAndEnter(btn.dataset.user, btn.dataset.pass);
+      if(window.__firebaseReady){ askPasswordAndEnter(btn.dataset.user, btn.dataset.pass); } else { alert('Σύνδεση στο Firebase... δοκίμασε ξανά σε 1-2''); }
     });
 
     // === Excel Export (HTML-based .xls) ===
@@ -595,10 +600,31 @@ const firebaseConfig = {
   appId: "1:259023927428:web:74099e69bea7b07a7b2ad1",
   measurementId: "G-JEVRCV89WB"
 };
-    /* === Initialize Firebase & anonymous auth === */
+    /* === Initialize Firebase & robust anonymous auth === */
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
-    firebase.auth().signInAnonymously().catch(console.warn);
+
+    // Ensure auth works across browsers (Safari/Private mode fallback)
+    (async () => {
+      try {
+        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      } catch (e) {
+        console.warn('Auth LOCAL persistence failed, falling back to NONE (private mode likely).', e);
+        try { await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE); } catch(_) {}
+      }
+      try{
+        await firebase.auth().signInAnonymously();
+      }catch(e){
+        console.error('Anonymous sign-in failed:', e);
+        alert('Αποτυχία σύνδεσης στο Firebase. Ελέγξτε ότι το Anonymous Sign-in είναι ενεργό.');
+      }
+      firebase.auth().onAuthStateChanged(user => {
+        if(user){
+          console.log('Firebase auth ready:', user.uid);
+          window.__firebaseReady = true;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
