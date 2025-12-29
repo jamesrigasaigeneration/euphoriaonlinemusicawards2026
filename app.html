@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<title>Euphoria Awards App</title>
+
+<!-- Firebase (loaded ONCE) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyA3j74FN_DIrsZcLq0gU1Y62eenSOzPqyQ",
+    authDomain: "euphoria-2026.firebaseapp.com",
+    projectId: "euphoria-2026",
+    storageBucket: "euphoria-2026.firebasestorage.app",
+    messagingSenderId: "259023927428",
+    appId: "1:259023927428:web:74099e69bea7b07a7b2ad1"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+</head>
+
+<body style="font-family:Arial;background:#111;color:white;text-align:center;padding:40px">
+<h1>Euphoria Awards – ONLINE</h1>
+
+<p>Αυτό είναι το τελικό app αρχείο.</p>
+<p>Αν αυτό φορτώνει χωρίς errors → Firebase OK.</p>
+
+<button onclick="saveTest()">Test Save</button>
+
+<script>
+function saveTest(){
+  db.collection("test").add({
+    time: new Date().toISOString()
+  }).then(()=>{
+    alert("Αποθηκεύτηκε online ✅");
+  }).catch(err=>{
+    alert("Σφάλμα: " + err.message);
+  });
+}
+</script>
+
+</body>
+</html>
