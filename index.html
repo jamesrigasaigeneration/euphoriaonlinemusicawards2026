@@ -1701,7 +1701,16 @@ importApply.addEventListener("click", applyImport);
     roomIdTxt.textContent = ROOM_ID;
 
     // Paste your Firebase config below:
-    const firebaseConfig = null; // <-- SET THIS
+   const firebaseConfig = {
+  apiKey: "AIzaSy....",
+  authDomain: "euphoria-2026.firebaseapp.com",
+  projectId: "euphoria-2026",
+  storageBucket: "euphoria-2026.firebasestorage.app",
+  messagingSenderId: "259023927428",
+  appId: "1:259023927428:web:....",
+  measurementId: "G-...."
+};
+
 
     const FIREBASE_ENABLED = !!(firebaseConfig && firebaseConfig.projectId);
 
