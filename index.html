@@ -595,13 +595,22 @@ function ensureScoringInitialized() {
   }
 }
 
-function saveNow() {
+async function saveNow() {
   const k = storageKey();
   if (!k) return;
-  localStorage.setItem(k, JSON.stringify(categories));
-}
 
-function loadDataset(key) {
+  // local backup (κρατάμε το παλιό)
+  localStorage.setItem(k, JSON.stringify(categories));
+
+  // online save
+  await setDoc(
+    doc(db, "datasets", activeKey),
+    { categories, updatedAt: serverTimestamp() },
+    { merge: true }
+  );
+}
+  
+async function loadDataset(key) {
   activeKey = key;
   elActiveLabel.textContent = DATASETS[activeKey].label;
   elActions.style.display = '';
