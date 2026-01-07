@@ -596,12 +596,7 @@ function ensureScoringInitialized() {
 }
 
 async function saveNow() {
-  const k = storageKey();
-  if (!k) return;
-
-  // local backup (κρατάμε το παλιό)
-  localStorage.setItem(k, JSON.stringify(categories));
-
+  
   // online save
   await setDoc(
     doc(db, "datasets", activeKey),
@@ -618,16 +613,19 @@ async function loadDataset(key) {
   elApp.style.display = '';
   elSearch.value = '';
 
-  const k = storageKey();
-  const saved = k ? localStorage.getItem(k) : null;
-  if (saved) {
-    try { categories = JSON.parse(saved); }
-    catch { categories = deepCopy(DATASETS[activeKey].categories); }
-  } else {
-    categories = deepCopy(DATASETS[activeKey].categories);
-  }
+const ref = doc(db, "datasets", activeKey);
+const snap = await getDoc(ref);
+
+if (snap.exists() && snap.data()?.categories) {
+  categories = snap.data().categories;
+} else {
+  categories = deepCopy(DATASETS[activeKey].categories);
   ensureScoringInitialized();
-  saveNow();
+  await setDoc(ref, {
+    categories,
+    createdAt: serverTimestamp()
+  });
+}
   render();
   playFlip();
 }
@@ -719,22 +717,12 @@ function escapeHtml(s) {
     .replaceAll("'",'&#039;');
 }
 
-
-function getDatasetCategories(key) {
-  const k = `euphoria_dnd_${key}`;
-  const saved = localStorage.getItem(k);
-  if (saved) {
-    try { return JSON.parse(saved); } catch {}
-  }
-  // fallback to defaults
-  return deepCopy(DATASETS[key].categories);
-}
-
-function computeTotals() {
+async function computeTotals() {
   const keys = Object.keys(DATASETS);
   const totalsByCat = new Map(); // catName -> Map(title -> total)
   for (const key of keys) {
-    const cats = getDatasetCategories(key) || [];
+    const snap = await getDoc(doc(db, "datasets", key));
+const cats = (snap.exists() && snap.data()?.categories) ? snap.data().categories : [];
     for (const c of cats) {
       const catName = (c && c.name) ? String(c.name) : '—';
       if (!totalsByCat.has(catName)) totalsByCat.set(catName, new Map());
@@ -760,10 +748,10 @@ function closeTotals() {
   if (totalsSearch) totalsSearch.value = '';
 }
 
-function renderTotals(filterText) {
+async function renderTotals(filterText) {
   if (!totalsBody) return;
   const q = (filterText || '').trim().toLowerCase();
-  const totalsByCat = computeTotals();
+const totalsByCat = await computeTotals();
 
   let html = '';
   for (const [catName, titleMap] of totalsByCat.entries()) {
