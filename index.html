@@ -507,7 +507,21 @@
     </div>
   </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  // 👇 ΕΔΩ ΚΟΛΛΑΣ ΑΥΤΟ ΠΟΥ ΣΟΥ ΕΔΩΣΕ ΤΟ FIREBASE
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// ανώνυμο login
+await signInAnonymously(auth);
 
 // ---- Intro splash (16s progress + reveal) ----
 (function(){
